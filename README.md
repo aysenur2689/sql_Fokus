@@ -2,11 +2,11 @@
 
 <div align="center">
 
-![Fokus IT](https://img.shields.io/badge/Fokus%20IT-Gestion%20Projets-blue?style=for-the-badge&logo=windows-terminal&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-Database-orange?style=for-the-badge&logo=mysql&logoColor=white)
-![Version](https://img.shields.io/badge/version-1.0.0-green?style=for-the-badge&logo=git-lfs&logoColor=white)
-![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green?style=for-the-badge&logo=github&logoColor=white)
-![Made with Love](https://img.shields.io/badge/Made%20with-Love-red?style=for-the-badge&logo=heart&logoColor=white)
+[![Fokus IT](https://img.shields.io/badge/Fokus%20IT-Gestion%20Projets-blue?style=for-the-badge&logo=windows-terminal&logoColor=white)](https://www.fokus-it.fr)
+[![SQL](https://img.shields.io/badge/SQL-Database-orange?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com)
+[![Version](https://img.shields.io/badge/version-1.0.0-green?style=for-the-badge&logo=git-lfs&logoColor=white)](https://github.com)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
+[![Made with Love](https://img.shields.io/badge/Made%20with-Love-red?style=for-the-badge&logo=heart&logoColor=white)](https://www.fokus-it.fr)
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%">
 
@@ -15,6 +15,11 @@
 <div align="center">
   <h3>🏢 Une Solution Complète de Gestion de Projets pour Fokus IT</h3>
   <p><i>Développé avec passion pour optimiser la gestion de projets IT</i></p>
+  
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/fokus-it)
+  [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/FokusIT)
+  [![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/fokusit)
+  [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/fokusit)
 </div>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png" width="100%">
@@ -250,22 +255,30 @@ USE fokus_gestion_projets;
   <table>
     <tr>
       <td align="center">
-        <img src="https://img.shields.io/badge/-Website-blue?style=for-the-badge&logo=firefox&logoColor=white" alt="Website"><br>
-        <a href="https://www.fokus-it.fr">www.fokus-it.fr</a>
+        <a href="https://www.fokus-it.fr" target="_blank">
+          <img src="https://img.shields.io/badge/-Website-blue?style=for-the-badge&logo=firefox&logoColor=white" alt="Website"><br>
+          www.fokus-it.fr
+        </a>
       </td>
       <td align="center">
-        <img src="https://img.shields.io/badge/-Email-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"><br>
-        contact@fokus-it.fr
+        <a href="mailto:contact@fokus-it.fr">
+          <img src="https://img.shields.io/badge/-Email-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"><br>
+          contact@fokus-it.fr
+        </a>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <img src="https://img.shields.io/badge/-Phone-green?style=for-the-badge&logo=phone&logoColor=white" alt="Phone"><br>
-        04 37 53 39 04
+        <a href="tel:+33437533904">
+          <img src="https://img.shields.io/badge/-Phone-green?style=for-the-badge&logo=phone&logoColor=white" alt="Phone"><br>
+          04 37 53 39 04
+        </a>
       </td>
       <td align="center">
-        <img src="https://img.shields.io/badge/-Address-purple?style=for-the-badge&logo=map&logoColor=white" alt="Address"><br>
-        11 Bd Eugène Deruelle, 69003 Lyon
+        <a href="https://goo.gl/maps/YOUR_GOOGLE_MAPS_LINK" target="_blank">
+          <img src="https://img.shields.io/badge/-Address-purple?style=for-the-badge&logo=map&logoColor=white" alt="Address"><br>
+          11 Bd Eugène Deruelle, 69003 Lyon
+        </a>
       </td>
     </tr>
   </table>
@@ -276,7 +289,9 @@ USE fokus_gestion_projets;
 <div align="center">
     <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%">
     <br>
-    <img src="https://img.shields.io/badge/Made%20with-%E2%9D%A4%EF%B8%8F-red.svg?style=for-the-badge" alt="Made with love">
+    <a href="https://www.fokus-it.fr">
+      <img src="https://img.shields.io/badge/Made%20with-%E2%9D%A4%EF%B8%8F-red.svg?style=for-the-badge" alt="Made with love">
+    </a>
     <br>
     <b>Développé avec passion par l'équipe Fokus IT</b>
     <br>
