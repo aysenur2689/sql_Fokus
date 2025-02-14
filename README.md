@@ -3,18 +3,23 @@
 ![Fokus IT](https://img.shields.io/badge/Fokus%20IT-Gestion%20Projets-blue)
 ![SQL](https://img.shields.io/badge/SQL-Database-orange)
 ![Version](https://img.shields.io/badge/version-1.0.0-green)
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
+![Made with Love](https://img.shields.io/badge/Made%20with-Love-red.svg)
 
 ## 📋 Description
 
-Ce projet est une démonstration d'une base de données SQL pour la gestion de projets chez Fokus IT. Il permet de gérer les clients, les projets et leurs relations de manière efficace et professionnelle.
+Ce projet est une démonstration d'une base de données SQL complète pour la gestion de projets chez Fokus IT. Il permet de gérer les clients, les projets, les employés, les compétences, les tâches et la facturation de manière efficace et professionnelle.
 
 ## 🎯 Fonctionnalités
 
-- ✨ Gestion complète des clients
-- 📊 Suivi des projets
-- 💰 Gestion des budgets
-- 📈 Analyses et rapports
-- 🔄 Statuts de projet dynamiques
+- ✨ Gestion complète des clients et leur suivi
+- 👥 Gestion des employés et leurs compétences
+- 📊 Suivi détaillé des projets et tâches
+- 💰 Gestion des budgets et facturation
+- 📈 Analyses et rapports avancés
+- 🔄 Suivi des statuts et de l'avancement
+- 📆 Planification et gestion du temps
+- 💡 Gestion des compétences et expertises
 
 ## 🗄️ Structure de la Base de Données
 
@@ -26,28 +31,87 @@ Ce projet est une démonstration d'une base de données SQL pour la gestion de p
 | nom_contact | VARCHAR(100) | Nom du contact principal |
 | email | VARCHAR(100) | Adresse email du contact |
 | telephone | VARCHAR(20) | Numéro de téléphone |
+| adresse | TEXT | Adresse postale |
+| ville | VARCHAR(100) | Ville |
+| code_postal | VARCHAR(10) | Code postal |
+| pays | VARCHAR(50) | Pays (France par défaut) |
+| secteur_activite | VARCHAR(100) | Secteur d'activité |
 | date_creation | TIMESTAMP | Date d'ajout du client |
+| statut_client | ENUM | Statut du client |
+
+### Table `employes`
+| Champ | Type | Description |
+|-------|------|-------------|
+| employe_id | INT | Identifiant unique de l'employé |
+| nom | VARCHAR(50) | Nom de famille |
+| prenom | VARCHAR(50) | Prénom |
+| email_pro | VARCHAR(100) | Email professionnel |
+| poste | VARCHAR(100) | Poste occupé |
+| departement | VARCHAR(100) | Département |
+| niveau_competence | ENUM | Niveau d'expertise |
 
 ### Table `projets`
 | Champ | Type | Description |
 |-------|------|-------------|
 | projet_id | INT | Identifiant unique du projet |
 | nom_projet | VARCHAR(100) | Nom du projet |
+| description | TEXT | Description détaillée |
 | client_id | INT | Référence au client |
-| date_debut | DATE | Date de début du projet |
+| chef_projet_id | INT | Chef de projet assigné |
+| date_debut | DATE | Date de début |
 | date_fin | DATE | Date de fin prévue |
-| statut | ENUM | État actuel du projet |
-| budget | DECIMAL | Budget alloué |
+| statut | ENUM | État du projet |
+| priorite | ENUM | Niveau de priorité |
+| budget | DECIMAL | Budget prévu |
+| cout_reel | DECIMAL | Coût réel |
 
-## 📊 Exemples de Requêtes
+### Autres Tables
+- `taches` : Gestion détaillée des tâches
+- `competences` : Référentiel des compétences
+- `employe_competences` : Association employés-compétences
+- `factures` : Suivi de la facturation
 
-Le système inclut plusieurs requêtes SQL démontrant différentes fonctionnalités :
+## 📊 Exemples d'Analyses Avancées
 
-- Jointures pour lier les informations clients et projets
-- Agrégations pour l'analyse des portfolios
-- Sous-requêtes pour des recherches complexes
-- Fonctions de fenêtrage pour les analyses cumulatives
-- Instructions CASE pour la catégorisation
+1. **Vue d'ensemble des projets :**
+```sql
+SELECT 
+    p.nom_projet,
+    p.statut,
+    p.priorite,
+    CONCAT(e.prenom, ' ', e.nom) as chef_projet,
+    c.nom_entreprise as client,
+    p.budget,
+    p.cout_reel,
+    COALESCE(p.cout_reel - p.budget, 0) as difference_budget
+FROM projets p
+JOIN employes e ON p.chef_projet_id = e.employe_id
+JOIN clients c ON p.client_id = c.client_id;
+```
+
+2. **Analyse des compétences :**
+```sql
+SELECT 
+    e.departement,
+    c.nom as competence,
+    COUNT(*) as nombre_employes
+FROM employes e
+JOIN employe_competences ec ON e.employe_id = ec.employe_id
+JOIN competences c ON ec.competence_id = c.competence_id
+GROUP BY e.departement, c.nom;
+```
+
+3. **Suivi financier :**
+```sql
+SELECT 
+    p.nom_projet,
+    COUNT(f.facture_id) as nombre_factures,
+    SUM(CASE WHEN f.statut = 'payee' 
+        THEN f.montant_ttc ELSE 0 END) as montant_paye
+FROM projets p
+LEFT JOIN factures f ON p.projet_id = f.projet_id
+GROUP BY p.projet_id, p.nom_projet;
+```
 
 ## 🛠️ Installation
 
@@ -65,27 +129,13 @@ Pour commencer à utiliser la base de données :
 USE fokus_gestion_projets;
 ```
 
-## 📈 Exemples d'Analyses
+## 📈 Fonctionnalités Avancées
 
-1. **Vue d'ensemble des projets par client :**
-```sql
-SELECT 
-    c.nom_entreprise,
-    COUNT(p.projet_id) as nombre_projets,
-    SUM(p.budget) as budget_total
-FROM clients c
-LEFT JOIN projets p ON c.client_id = p.client_id
-GROUP BY c.client_id;
-```
-
-2. **Statut des projets :**
-```sql
-SELECT 
-    statut,
-    COUNT(*) as nombre_projets
-FROM projets
-GROUP BY statut;
-```
+- **Suivi des Performances :** Analyse détaillée de l'avancement des projets
+- **Gestion des Ressources :** Suivi de la charge de travail des employés
+- **Reporting Financier :** Analyse des budgets et coûts réels
+- **Gestion des Compétences :** Suivi des expertises et formations
+- **Facturation Automatisée :** Génération et suivi des factures
 
 ## 🤝 Contribution
 
@@ -106,6 +156,7 @@ Pour contribuer à ce projet :
 - Site Web : [www.fokus-it.fr](https://www.fokus-it.fr)
 - Email : contact@fokus-it.fr
 - Téléphone : 04 37 53 39 04
+- Adresse : 11 Bd Eugène Deruelle, 69003 Lyon
 
 ---
 <div align="center">
