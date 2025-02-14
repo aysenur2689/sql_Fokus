@@ -202,25 +202,149 @@ GROUP BY p.projet_id, p.nom_projet;
 <div align="center">
 
 ### Prérequis
-![MySQL](https://img.shields.io/badge/MySQL-8.0+-blue?style=for-the-badge&logo=mysql&logoColor=white)
-![Server](https://img.shields.io/badge/Server-Compatible-green?style=for-the-badge&logo=server-fault&logoColor=white)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0+-blue?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com)
+[![Server](https://img.shields.io/badge/Server-Compatible-green?style=for-the-badge&logo=server-fault&logoColor=white)](https://www.mysql.com/downloads/)
 
 </div>
 
-1. Connectez-vous à votre serveur MySQL
+### 📥 Installation de MySQL
+
+1. **Sur macOS (avec Homebrew)**
 ```bash
-mysql -u votre_utilisateur -p
+# Installation de MySQL
+brew install mysql
+
+# Démarrage du service MySQL
+brew services start mysql
 ```
 
-2. Exécutez le script SQL :
+2. **Sur Linux (Ubuntu/Debian)**
+```bash
+# Mise à jour des paquets
+sudo apt update
+
+# Installation de MySQL
+sudo apt install mysql-server
+
+# Démarrage du service MySQL
+sudo systemctl start mysql
+```
+
+3. **Sur Windows**
+- Téléchargez MySQL depuis [le site officiel](https://dev.mysql.com/downloads/installer/)
+- Suivez l'assistant d'installation
+- Assurez-vous que le service MySQL est démarré
+
+### 🔧 Configuration Initiale
+
+1. **Connexion à MySQL**
+```bash
+# Connexion sans mot de passe (si configuré ainsi)
+mysql -u root
+
+# OU avec mot de passe
+mysql -u root -p
+```
+
+2. **Création et Utilisation de la Base de Données**
 ```sql
+-- Création de la base de données
+CREATE DATABASE fokus_gestion_projets;
+
+-- Utilisation de la base de données
+USE fokus_gestion_projets;
+```
+
+### 📋 Installation du Projet
+
+1. **Clonez le Projet**
+```bash
+git clone https://github.com/votre-repo/fokus-gestion-projets.git
+cd fokus-gestion-projets
+```
+
+2. **Importez la Structure et les Données**
+```bash
+# Dans le terminal
+mysql -u root < fokus_gestion_projets.sql
+
+# OU dans MySQL
 source fokus_gestion_projets.sql
 ```
 
-3. Commencez à utiliser la base de données :
+### 🔍 Vérification de l'Installation
+
+Exécutez ces requêtes pour vérifier que tout est bien installé :
+
 ```sql
-USE fokus_gestion_projets;
+-- Vérification des tables
+SHOW TABLES;
+
+-- Vérification des données des projets
+SELECT p.nom_projet, c.nom_entreprise, 
+       CONCAT(e.prenom, ' ', e.nom) as chef_projet
+FROM projets p
+JOIN clients c ON p.client_id = c.client_id
+JOIN employes e ON p.chef_projet_id = e.employe_id;
 ```
+
+### 🎯 Exemples d'Utilisation
+
+1. **Liste des Clients**
+```sql
+SELECT nom_entreprise, nom_contact, ville 
+FROM clients 
+ORDER BY ville;
+```
+
+2. **Projets en Cours**
+```sql
+SELECT nom_projet, priorite, budget
+FROM projets
+WHERE statut = 'actif'
+ORDER BY priorite DESC;
+```
+
+3. **Analyse des Compétences**
+```sql
+SELECT e.departement, c.nom as competence,
+       COUNT(*) as nombre_employes
+FROM employes e
+JOIN employe_competences ec ON e.employe_id = ec.employe_id
+JOIN competences c ON ec.competence_id = c.competence_id
+GROUP BY e.departement, c.nom;
+```
+
+### ⚠️ Résolution des Problèmes Courants
+
+1. **Erreur d'Accès**
+```bash
+# Réinitialisation du mot de passe root
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'votre_nouveau_mot_de_passe';
+FLUSH PRIVILEGES;
+```
+
+2. **Erreur de Base de Données Existante**
+```sql
+-- Suppression de la base si nécessaire
+DROP DATABASE IF EXISTS fokus_gestion_projets;
+CREATE DATABASE fokus_gestion_projets;
+```
+
+3. **Erreur de Privilèges**
+```sql
+-- Attribution des privilèges
+GRANT ALL PRIVILEGES ON fokus_gestion_projets.* TO 'votre_utilisateur'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+### 📝 Notes Importantes
+
+- Assurez-vous que MySQL est bien démarré avant toute opération
+- Vérifiez les droits d'accès aux fichiers
+- Sauvegardez vos données avant toute manipulation importante
+- Pour les environnements de production, configurez des mots de passe sécurisés
 
 ## 🌟 Fonctionnalités Avancées
 
