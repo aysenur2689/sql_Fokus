@@ -177,3 +177,110 @@ Pour toute assistance technique :
 </div>
 
 ---
+
+## 📘 Guide d'Utilisation SQL Server
+
+### Installation de SQL Server
+1. Téléchargez SQL Server 2022 Developer Edition depuis le [site officiel Microsoft](https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads)
+2. Lancez l'installation et sélectionnez "Installation personnalisée"
+3. Installez les composants suivants :
+   - Services Moteur de base de données
+   - SQL Server Management Studio (SSMS)
+
+### Démarrage avec SQL Server
+1. **Lancer SQL Server Management Studio**
+   - Recherchez "SSMS" dans le menu Démarrer
+   - Connectez-vous avec l'authentification Windows
+
+2. **Créer une nouvelle base de données**
+   ```sql
+   -- Via SSMS : Clic droit sur "Bases de données" > "Nouvelle base de données"
+   -- Ou via requête :
+   CREATE DATABASE fokus_gestion_projets;
+   GO
+   USE fokus_gestion_projets;
+   ```
+
+3. **Exécuter des scripts SQL**
+   - Via SSMS : 
+     1. Ouvrez un nouveau fichier de requête (Ctrl+N)
+     2. Collez le script SQL
+     3. Cliquez sur Exécuter (F5)
+   
+   - Via PowerShell :
+   ```powershell
+   # Exécuter un fichier SQL
+   sqlcmd -S . -E -i "chemin_vers_fichier.sql"
+
+   # Exécuter une requête directe
+   sqlcmd -S . -E -Q "SELECT * FROM clients"
+   ```
+
+### Commandes SQL Server Utiles
+
+1. **Gestion des Services**
+   ```powershell
+   # Démarrer SQL Server
+   Start-Service MSSQLSERVER
+
+   # Arrêter SQL Server
+   Stop-Service MSSQLSERVER
+
+   # Vérifier le statut
+   Get-Service MSSQLSERVER
+   ```
+
+2. **Sauvegarde et Restauration**
+   ```sql
+   -- Sauvegarde complète
+   BACKUP DATABASE fokus_gestion_projets
+   TO DISK = 'C:\Backup\fokus_gestion_projets.bak'
+   WITH FORMAT, COMPRESSION;
+
+   -- Restauration
+   RESTORE DATABASE fokus_gestion_projets
+   FROM DISK = 'C:\Backup\fokus_gestion_projets.bak'
+   WITH REPLACE;
+   ```
+
+3. **Maintenance de Base**
+   ```sql
+   -- Vérifier l'intégrité
+   DBCC CHECKDB('fokus_gestion_projets');
+
+   -- Reconstruire les index
+   ALTER INDEX ALL ON table_name REBUILD;
+   ```
+
+### Résolution des Problèmes Courants
+
+1. **Erreur de Connexion**
+   - Vérifiez que le service SQL Server est démarré
+   - Assurez-vous d'avoir les droits administrateur
+   - Vérifiez le nom de l'instance (par défaut: .)
+
+2. **Erreur d'Accès aux Fichiers**
+   - Vérifiez les permissions du dossier
+   - Exécutez SSMS en tant qu'administrateur
+
+3. **Problèmes de Performance**
+   - Vérifiez l'utilisation des index
+   - Analysez le plan d'exécution des requêtes
+   - Surveillez l'utilisation des ressources
+
+### Bonnes Pratiques
+
+1. **Sécurité**
+   - Utilisez l'authentification Windows quand possible
+   - Limitez les droits d'accès au minimum nécessaire
+   - Changez régulièrement les mots de passe
+
+2. **Performance**
+   - Créez des index appropriés
+   - Évitez les requêtes SELECT *
+   - Utilisez des procédures stockées
+
+3. **Maintenance**
+   - Planifiez des sauvegardes régulières
+   - Surveillez l'espace disque
+   - Mettez à jour régulièrement SQL Server
